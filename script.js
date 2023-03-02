@@ -85,3 +85,8 @@ function bot(){
 function getIdVal(classname){
     return document.querySelector(".box" + classname).id; //return id value
 }
+function checkIdSign(val1, val2, val3, sign){ //checking all id value is equal to sign (X or O) or not if yes then return true
+    if(getIdVal(val1) == sign && getIdVal(val2) == sign && getIdVal(val3) == sign){
+        return true;
+    }
+}
