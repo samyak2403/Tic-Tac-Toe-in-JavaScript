@@ -82,3 +82,6 @@ function bot(){
         playerSign = "X"; //if player has chosen X then bot will be O right then we change the playerSign again to X so user will X because above we have changed the playerSign to O for bot
     }
 }
+function getIdVal(classname){
+    return document.querySelector(".box" + classname).id; //return id value
+}
