@@ -53,3 +53,32 @@ function clickedBox(element){
         bot(runBot); //calling bot function
     }, randomTimeDelay); //passing random delay value
 }
+// bot auto select function
+function bot(){
+    let array = []; //creating empty array...we'll store unclicked boxes index
+    if(runBot){ //if runBot is true
+        playerSign = "O"; //change the playerSign to O so if player has chosen X then bot will O
+        for (let i = 0; i < allBox.length; i++) {
+            if(allBox[i].childElementCount == 0){ //if the box/span has no children means <i> tag
+                array.push(i); //inserting unclicked boxes number/index inside array
+            }
+        }
+        let randomBox = array[Math.floor(Math.random() * array.length)]; //getting random index from array so bot will select random unselected box
+        if(array.length > 0){ //if array length is greater than 0
+            if(players.classList.contains("player")){ 
+                playerSign = "X"; //if player has chosen O then bot will X
+                allBox[randomBox].innerHTML = `<i class="${playerXIcon}"></i>`; //adding cross icon tag inside bot selected element
+                allBox[randomBox].setAttribute("id", playerSign); //set id attribute in span/box with player choosen sign
+                players.classList.add("active"); ///add active class in players
+            }else{
+                allBox[randomBox].innerHTML = `<i class="${playerOIcon}"></i>`; //adding circle icon tag inside bot selected element
+                players.classList.remove("active"); //remove active class in players
+                allBox[randomBox].setAttribute("id", playerSign); //set id attribute in span/box with player choosen sign
+            }
+            selectWinner(); //calling selectWinner function
+        }
+        allBox[randomBox].style.pointerEvents = "none"; //once bot select any box then user can't click on that box
+        playBoard.style.pointerEvents = "auto"; //add pointerEvents auto in playboard so user can again click on box
+        playerSign = "X"; //if player has chosen X then bot will be O right then we change the playerSign again to X so user will X because above we have changed the playerSign to O for bot
+    }
+}
