@@ -90,3 +90,11 @@ function checkIdSign(val1, val2, val3, sign){ //checking all id value is equal t
         return true;
     }
 }
+function selectWinner(){ //if the one of following winning combination match then select the winner
+    if(checkIdSign(1,2,3,playerSign) || checkIdSign(4,5,6, playerSign) || checkIdSign(7,8,9, playerSign) || checkIdSign(1,4,7, playerSign) || checkIdSign(2,5,8, playerSign) || checkIdSign(3,6,9, playerSign) || checkIdSign(1,5,9, playerSign) || checkIdSign(3,5,7, playerSign)){
+        runBot = false; //passing the false boolen value to runBot so bot won't run again
+        bot(runBot); //calling bot function
+        setTimeout(()=>{ //after match won by someone then hide the playboard and show the result box after 700ms
+            resultBox.classList.add("show");
+            playBoard.classList.remove("show");
+        }, 700); //1s = 1000ms
